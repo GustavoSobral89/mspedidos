@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:latest  # Usando a última versão do PostgreSQL
+    container_name: pedido-db
+    environment:
+      POSTGRES_USER: postgres        # Definindo o usuário do banco de dados
+      POSTGRES_PASSWORD: password      # Definindo a senha do banco de dados
+      POSTGRES_DB: fase4       # Nome do banco de dados a ser criado
+    ports:
+      - "5432:5432"                  # Mapeia a porta 5432 do contêiner para a porta 5432 da máquina local
+    volumes:
+      - postgres_data:/var/lib/postgresql/data   # Persiste os dados do banco de dados em volume
+    networks:
+      - produto-network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  produto-network:
+    driver: bridge
